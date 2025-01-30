@@ -2,7 +2,9 @@ package Class37_Xpath;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class XpathEbayEg {
     public static void main(String[] args) throws InterruptedException {
@@ -11,10 +13,22 @@ public class XpathEbayEg {
         driver.manage().window().maximize();
         driver.get("https://www.ebay.co.uk/");
 
-        driver.findElement(By.xpath("//a[@class=\"gh-search-button__advanced-link\"]")).click();
+        WebElement advanceBtn = driver.findElement(By.xpath("//a[@class=\"gh-search-button__advanced-link\"]"));
+        advanceBtn.click();
 
         Thread.sleep(5000);
-        driver.findElement(By.xpath("//button[@class=\"btn btn--primary\"]")).click();
+
+        WebElement categoryDropDown = driver.findElement(By.xpath("//select[@aria-label=\"In this category\"]"));
+
+        Select sc = new Select(categoryDropDown);
+        sc.selectByVisibleText("Art");
+//        sc.selectByValue("550");
+//        sc.selectByIndex(1);
+
+
+        WebElement searchBtn = driver.findElement(By.xpath("//button[@class=\"btn btn--primary\"]"));
+        searchBtn.click();
+
 
         Thread.sleep(2000);
         driver.findElement(By.xpath("//img[@alt=\"Paintings\"]")).click();
